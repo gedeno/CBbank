@@ -34,10 +34,11 @@ class login(LoginView):
 @method_decorator(login_required(login_url = 'login'),name='dispatch')
 class home(TemplateView):
     template_name = "main/home.html"
-class Cheack_balance(generic.ListView):
+class Cheack_balance(generic.DetailView):
+    model = Userprofile
     template_name = "main/CheackBL.html"
     context_object_name = 'UserBlance'
-    def get_queryset(self):
-        return Userprofile.objects.filter(user=self.request.user)
+    def get_object(self):
+        return Userprofile.objects.get(user=self.request.user)
 
       
