@@ -40,5 +40,10 @@ class Cheack_balance(generic.DetailView):
     context_object_name = 'UserBlance'
     def get_object(self):
         return Userprofile.objects.get(user=self.request.user)
-
-      
+class Add_balance(generic.UpdateView):
+    model = Userprofile
+    fields =['balance']
+    template_name = "main/addbalance.html"
+    success_url = "/"
+    def get_object(self):
+        return Userprofile.objects.get(user = self.request.user)

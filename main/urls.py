@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import signup ,login ,home,Cheack_balance
+from .views import signup ,login ,home,Cheack_balance ,Add_balance
 from django.contrib.auth.views import LoginView,LogoutView 
 
 urlpatterns = [
@@ -8,6 +8,7 @@ urlpatterns = [
     path('',home.as_view(),name="home"),
     path('Cheackbalance/',Cheack_balance.as_view(),name='Cheackbalance'),
     path('logout/',LogoutView.as_view(next_page = "login"), name = "logout"),
+    path('addbalance/',Add_balance.as_view(),name='addbalance')
 
 ]
 
