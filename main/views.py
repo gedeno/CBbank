@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.forms import UserCreationForm 
 from django.views.generic import FormView
 from django.contrib.auth.views import LoginView,LogoutView
@@ -27,6 +27,12 @@ class signup(FormView):
         return super().form_valid(form)
 class login(LoginView):
     template_name = "main/login.html"
-    success_url = "/home/"
-        
-        
+    success_url = "/"
+class home(LoginRequiredMixin):
+    template_name = "main/home.html"
+class Cheack_balance(generic.ListView):
+    template_name = "main/CheackBL.html"
+    context_object_name = 'UserBlance'
+    def get_queryset(self):
+        return Userprofile.objects.filter(user=self.request.user)
+    
