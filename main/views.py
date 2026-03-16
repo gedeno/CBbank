@@ -11,7 +11,7 @@ from .forms import UserprofileForm
 
 # Create your views here.
 class signup(FormView):
-    template_name = "signup.html"
+    template_name = "main/signup.html"
     form_class = UserCreationForm 
     success_url = "/login/"
     def form_valid(self, form):
@@ -25,6 +25,8 @@ class signup(FormView):
         )
         user.save()
         return super().form_valid(form)
-
+class login(LoginView):
+    template_name = "main/login.html"
+    success_url = "/home/"
         
         
