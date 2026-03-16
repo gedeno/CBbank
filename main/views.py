@@ -2,12 +2,15 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.forms import UserCreationForm 
 from django.views.generic import FormView
 from django.contrib.auth.views import LoginView,LogoutView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.decorators import method_decorator
 from django.views import generic
 from django.views.generic.detail import DetailView
 from django.contrib.auth.models import User
+from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
 from .models import Userprofile
 from .forms import UserprofileForm
+
 
 # Create your views here.
 class signup(FormView):
@@ -28,11 +31,14 @@ class signup(FormView):
 class login(LoginView):
     template_name = "main/login.html"
     success_url = "/"
-class home(LoginRequiredMixin):
+@method_decorator(login_required(login_url = 'login'),name='dispatch')
+class home(TemplateView):
     template_name = "main/home.html"
 class Cheack_balance(generic.ListView):
     template_name = "main/CheackBL.html"
     context_object_name = 'UserBlance'
     def get_queryset(self):
         return Userprofile.objects.filter(user=self.request.user)
-    
+class Logout(LogoutView):
+    template_name = 'main/logout.html'
+      
