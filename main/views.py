@@ -26,7 +26,7 @@ class signup(FormView):
             acc_no = acc_no,
             user = user
         )
-        user.save()
+        users.save()
         return super().form_valid(form)
 class login(LoginView):
     template_name = "main/login.html"
@@ -39,6 +39,5 @@ class Cheack_balance(generic.ListView):
     context_object_name = 'UserBlance'
     def get_queryset(self):
         return Userprofile.objects.filter(user=self.request.user)
-class Logout(LogoutView):
-    template_name = 'main/logout.html'
+
       
