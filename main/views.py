@@ -47,3 +47,16 @@ class Add_balance(generic.UpdateView):
     success_url = "/"
     def get_object(self):
         return Userprofile.objects.get(user = self.request.user)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["balance"] = self.get_object().balance
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        balance = int(self.request.POST['addbalance'])
+        use = self.get_object()
+        use.balance += balance
+        use.save()
+        return redirect('home')
+    

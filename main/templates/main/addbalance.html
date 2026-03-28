@@ -6,9 +6,12 @@
     <title>Document</title>
 </head>
 <body>
+    <div>
+        <h1>balance: {{balance}} birr</h1>
+    </div>
     <form action="" method="post">
         {% csrf_token %}
-        {{form.as_p}}
+        <input type="number" name="addbalance" id="">
         <button type="submit">Add balance</button>
     </form>
 </body>
