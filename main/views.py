@@ -59,4 +59,3 @@ class Add_balance(generic.UpdateView):
         use.balance += balance
         use.save()
         return redirect('home')
-    
